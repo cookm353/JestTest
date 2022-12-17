@@ -42,7 +42,7 @@ class MarkovMachine {
   
     makeText(numWords = 100) {
 
-      let text: String
+      let text: String = ''
       let word: String
       let previousWord: String
       let currentNumWords: number = 0
@@ -52,6 +52,7 @@ class MarkovMachine {
         if ( currentNumWords === 0 ) {
             let randomWordIndex: number = Math.floor(Math.random() * this.words.length)
             word = this.words[randomWordIndex]
+            console.log('First word: ', word)
             // text = word
         } else {
             previousWord = word
@@ -61,8 +62,8 @@ class MarkovMachine {
             let randomWordIndex: number = Math.floor(Math.random() * chainLength)
             word = wordChainLink[randomWordIndex]
 
-            // Prevent null from being added
-            if (word == null) {
+            // Prevent nulls and duplicates from being added
+            if (word == null || word === previousWord) {
                 let randomWordIndex: number = Math.floor(Math.random() * this.words.length)
                 word = this.words[randomWordIndex]
             }
@@ -72,39 +73,13 @@ class MarkovMachine {
 
         currentNumWords++
       }
-
-    //   for ( let i = 0; i < numWords; i++ ) {
-    //     if ( i === 0 ) {
-    //         let randomWordIndex: number = Math.floor(Math.random() * this.words.length)
-    //         word = this.words[randomWordIndex]
-    //     } else {
-    //         previousWord = word
-
-    //         // Pick a random word if the previous word doesn't have any words in the chain
-    //         if ( previousWord === null ) {
-    //             let randomWordIndex: number = Math.floor(Math.random() * this.words.length)
-    //             word = this.words[randomWordIndex]
-    //         } else {
-    //             let wordChainLink: Array<string> = this.chain[`${previousWord}`]
-    //             let chainLength: number = this.chain[`${previousWord}`].length
-    //             let randomWordIndex: number = Math.floor(Math.random() * chainLength)
-
-    //             word = wordChainLink[randomWordIndex]
-    //         }
-
-    //     }
-
-    //     text = `${text} ${word}`     
-    //   }
-
       return `${text}.`
     }
   }
   
-const markov = new MarkovMachine('the cat in the hat is in the hat')
-// const markov = new MarkovMachine('a man a plan a canal panama')
+// const markov = new MarkovMachine('the cat in the hat is in the hat')
+const markov = new MarkovMachine('a man a plan a canal panama')
 const text = markov.makeText(100)
-
 console.log(text)
 
 module.exports = {
