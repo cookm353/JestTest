@@ -56,7 +56,12 @@ class MarkovMachine {
             text = `${text} ${word}`.trim();
             currentNumWords++;
         }
-        return `${text}.`;
+        if (text.slice(-1) === '.' || text.slice(-1) === '!') {
+            return `${text}`;
+        }
+        else {
+            return `${text}.`;
+        }
     }
 }
 module.exports = {
