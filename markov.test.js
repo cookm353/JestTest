@@ -22,4 +22,14 @@ describe('Test MarkovMachine', () => {
             'is': ['in']
         })
     })
+
+    test('Verifying length', () => {
+        text = markov.makeText(20)
+        expect(text.split(' ').length).toEqual(20)
+    })
+
+    test('Verifying there are no nulls', () => {
+        text = markov.makeText(20)
+        expect(text.split(' ')).not.toContain(null)
+    })
 })
