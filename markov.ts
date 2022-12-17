@@ -69,7 +69,7 @@ class MarkovMachine {
             }
             
         }
-        text = `${text} ${word}`
+        text = `${text} ${word}`.trim()
 
         currentNumWords++
       }

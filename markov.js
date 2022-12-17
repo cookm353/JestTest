@@ -55,7 +55,7 @@ class MarkovMachine {
                     word = this.words[randomWordIndex];
                 }
             }
-            text = `${text} ${word}`;
+            text = `${text} ${word}`.trim();
             currentNumWords++;
         }
         return `${text}.`;
