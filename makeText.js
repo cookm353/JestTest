@@ -2,11 +2,10 @@
 const { readFile } = require('fs');
 const { MarkovMachine } = require('./markov.js');
 const process = require('process');
-let words;
 let markov;
 // Read file and return text
-const read = async (path) => {
-    words = await readFile(path, 'utf8', async function (err, data) {
+const read = (path) => {
+    readFile(path, 'utf8', async function (err, data) {
         if (err) {
             console.log(`Error: ${err}`);
             process.kill(1);
@@ -20,3 +19,6 @@ const read = async (path) => {
 };
 const path = process.argv[2];
 read(path);
+module.exports = {
+    read: read
+};
