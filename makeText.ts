@@ -3,6 +3,7 @@
 const { readFile } = require('fs')
 const { MarkovMachine } = require('./markov.js')
 const process = require('process')
+const axios = require('axios')
 
 let markov
 
@@ -20,9 +21,22 @@ const read = (path: string) => {
     })
 }
 
-const path = process.argv[2]
-read(path)
+const readURL = async (path: string) => {
+    try {
+        const resp = await axios.get(path)
+        const webText = resp.data
+        markov = new MarkovMachine(webText)
+        let text = markov.makeText(20)
+        console.log(text)
+    } catch(err) {
+        console.log(err)
+    }
+}
 
-module.exports = {
-    read: read
+const path = process.argv[2]
+
+if (path.includes('http')) {
+    readURL(path)
+} else {
+    read(path)
 }
