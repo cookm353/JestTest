@@ -40,8 +40,6 @@ class MarkovMachine {
             if (currentNumWords === 0) {
                 let randomWordIndex = Math.floor(Math.random() * this.words.length);
                 word = this.words[randomWordIndex];
-                console.log('First word: ', word);
-                // text = word
             }
             else {
                 previousWord = word;
@@ -61,10 +59,6 @@ class MarkovMachine {
         return `${text}.`;
     }
 }
-// const markov = new MarkovMachine('the cat in the hat is in the hat')
-const markov = new MarkovMachine('a man a plan a canal panama');
-const text = markov.makeText(100);
-console.log(text);
 module.exports = {
     MarkovMachine: MarkovMachine
 };

@@ -52,8 +52,6 @@ class MarkovMachine {
         if ( currentNumWords === 0 ) {
             let randomWordIndex: number = Math.floor(Math.random() * this.words.length)
             word = this.words[randomWordIndex]
-            console.log('First word: ', word)
-            // text = word
         } else {
             previousWord = word
             let wordChainLink: Array<string> = this.chain[`${previousWord}`]
@@ -64,8 +62,8 @@ class MarkovMachine {
 
             // Prevent nulls and duplicates from being added
             if (word == null || word === previousWord) {
-                let randomWordIndex: number = Math.floor(Math.random() * this.words.length)
-                word = this.words[randomWordIndex]
+              let randomWordIndex: number = Math.floor(Math.random() * this.words.length)
+              word = this.words[randomWordIndex]
             }
             
         }
@@ -76,11 +74,6 @@ class MarkovMachine {
       return `${text}.`
     }
   }
-  
-// const markov = new MarkovMachine('the cat in the hat is in the hat')
-const markov = new MarkovMachine('a man a plan a canal panama')
-const text = markov.makeText(100)
-console.log(text)
 
 module.exports = {
     MarkovMachine: MarkovMachine
