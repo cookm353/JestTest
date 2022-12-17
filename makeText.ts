@@ -1,9 +1,11 @@
 /** Command-line tool to generate Markov text. */
 
 const { readFile } = require('fs')
+const { MarkovMachine } = require('./markov.js')
 const process = require('process')
 
 let words: Promise<string>
+let markov
 
 // Read file and return text
 const read = async (path: string) => {
@@ -12,14 +14,12 @@ const read = async (path: string) => {
             console.log(`Error: ${err}`)
             process.kill(1)
         } else {
-            // console.log(data)
-            return await data
+            markov = new MarkovMachine(data)
+            let text = markov.makeText(20)
+            console.log(text)
         }
     })
 }
 
 const path = process.argv[2]
-// const words: Promise<string> = read(path)
-
-
-console.log(words)
+read(path)
