@@ -40,6 +40,10 @@ class MarkovMachine {
             if (currentNumWords === 0) {
                 let randomWordIndex = Math.floor(Math.random() * this.words.length);
                 word = this.words[randomWordIndex];
+                // Only use a capitalized word to start the text
+                if (word.slice(0, 1).toUpperCase() !== word.slice(0, 1)) {
+                    continue;
+                }
             }
             else {
                 previousWord = word;
